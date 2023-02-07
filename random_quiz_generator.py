@@ -1,7 +1,7 @@
 #! python3
 """This program creates quizzes with questions in a random order and an answer key for each quiz type"""
 
-import random, pprint
+import random, pprint, os
 
 capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona': 'Phoenix',
 'Arkansas': 'Little Rock', 'California': 'Sacramento', 'Colorado': 'Denver',
@@ -19,4 +19,10 @@ capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona': 'Phoenix',
 'Nashville', 'Texas': 'Austin', 'Utah': 'Salt Lake City', 'Vermont':
 'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia', 'West Virginia': 'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
 
-pprint.pprint(capitals)
+print(len(capitals))
+os.mkdir("../quizzes")
+os.mkdir("../answer_keys")
+
+for quizNum in range(35):    
+    quiz = open(f"../quizzes/quiz{quizNum+1}" ,'w')
+    answer_key = open(f"../answer_keys/answer_key{quizNum+1}", 'w')
