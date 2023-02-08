@@ -53,7 +53,9 @@ def make_question(state, options_number):
     for index, option in enumerate(options):
         output_str += f"{option_letters[index]}. {option}\n"
 
-    return output_str
+    correct_option = option_letters[options.index(capitals[state])]
+
+    return [output_str, correct_option]
 
 for quizNum in range(35):  
     # Create each quiz and answer key text file 
