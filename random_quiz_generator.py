@@ -2,6 +2,7 @@
 """This program creates quizzes with questions in a random order and an answer key for each quiz type"""
 
 import random, pprint, os
+from pathlib import Path
 
 capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona': 'Phoenix',
 'Arkansas': 'Little Rock', 'California': 'Sacramento', 'Colorado': 'Denver',
@@ -19,10 +20,61 @@ capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona': 'Phoenix',
 'Nashville', 'Texas': 'Austin', 'Utah': 'Salt Lake City', 'Vermont':
 'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia', 'West Virginia': 'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
 
-print(len(capitals))
-os.mkdir("../quizzes")
-os.mkdir("../answer_keys")
+# Creates the quizzes directory
+if not(Path("../quizzes").exists()):
+    print("Making quizzes directory...")
+    os.mkdir("../quizzes")
 
-for quizNum in range(35):    
-    quiz = open(f"../quizzes/quiz{quizNum+1}" ,'w')
-    answer_key = open(f"../answer_keys/answer_key{quizNum+1}", 'w')
+# Creates the answer keys directory
+if not(Path("../answer_keys").exists()):
+    print("Making answer keys directory...")
+    os.mkdir("../answer_keys")
+
+
+def make_question(state, options_number):
+    """This function makes a question"""
+
+    output_str = ''
+    options = [capitals[state]]
+    option_letters = ['a', 'b', 'c', 'd', 'e']
+    fake_options = list(capitals.values())
+    random.shuffle(fake_options)
+
+    for option in fake_options:
+        if not(option in options):
+            options.append(option)
+            if len(options) >= options_number:
+                break
+
+    random.shuffle(options)
+
+    output_str += f"The capital of {state} is __________\n"
+
+    for index, option in enumerate(options):
+        output_str += f"{option_letters[index]}. {option}\n"
+
+    return output_str
+
+for quizNum in range(35):  
+    # Create each quiz and answer key text file 
+    current_quiz = quizNum + 1
+
+    quiz = open(f"../quizzes/quiz{current_quiz}.txt", 'w')
+    answer_key = open(f"../answer_keys/answer_key{quizNum+1}.txt", 'w')
+
+    # Create header
+    quiz.write("Name:\n\nDate:\n\nCourse:\n\n")
+    quiz.write(f"State Capitals Quiz (Form {current_quiz})")
+    quiz.write("\n\n")
+    answer_key.write(f"ANSWER KEY\nQUIZ FORM {current_quiz}\n\n")
+
+    # Shuffle the order of the states
+    states = list(capitals.keys())
+    random.shuffle(states)
+
+    # write a question to each question file
+    for index in range(len(capitals)):
+        q_num = index + 1
+        question, answer = make_question(states[index], 4)
+        quiz.write(f"{q_num}. {question} \n")
+        answer_key.write(f"{q_num}. {answer}")
