@@ -79,6 +79,6 @@ for quizNum in range(35):
         q_num = index + 1
         question, answer = make_question(states[index], 4)
         quiz.write(f"{q_num}. {question} \n")
-        answer_key.write(f"{q_num.rjust(3, ' ')}. {answer} \n")
+        answer_key.write(f"{(str(q_num) + '.').ljust(3, ' ')} {answer} \n")
 
     quiz.write(f"GOODLUCK!!")
