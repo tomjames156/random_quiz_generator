@@ -51,7 +51,7 @@ def make_question(state, options_number):
     output_str += f"The capital of {state} is __________\n"
 
     for index, option in enumerate(options):
-        output_str += f"({option_letters[index]}) {option}\n"
+        output_str += f" ({option_letters[index]}) {option}\n"
 
     correct_option = option_letters[options.index(capitals[state])]
 
