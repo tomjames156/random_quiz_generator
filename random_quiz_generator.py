@@ -51,7 +51,7 @@ def make_question(state, options_number):
     output_str += f"The capital of {state} is __________\n"
 
     for index, option in enumerate(options):
-        output_str += f"{option_letters[index]}. {option}\n"
+        output_str += f"({option_letters[index]}) {option}\n"
 
     correct_option = option_letters[options.index(capitals[state])]
 
@@ -79,4 +79,6 @@ for quizNum in range(35):
         q_num = index + 1
         question, answer = make_question(states[index], 4)
         quiz.write(f"{q_num}. {question} \n")
-        answer_key.write(f"{q_num}. {answer}")
+        answer_key.write(f"{q_num.rjust(3, ' ')}. {answer} \n")
+
+    quiz.write(f"GOODLUCK!!")
