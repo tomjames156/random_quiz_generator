@@ -36,24 +36,19 @@ def make_question(state, options_number):
 
     output_str = ''
     options = [capitals[state]]
-    option_letters = ['a', 'b', 'c', 'd', 'e']
     fake_options = list(capitals.values())
-    random.shuffle(fake_options)
-
-    for option in fake_options:
-        if not(option in options):
-            options.append(option)
-            if len(options) >= options_number:
-                break
+    del fake_options[fake_options.index(options[0])]
+    fake_options = random.sample(fake_options, 3)
+    options += fake_options
 
     random.shuffle(options)
 
     output_str += f"The capital of {state} is __________\n"
 
     for index, option in enumerate(options):
-        output_str += f" ({option_letters[index]}) {option}\n"
+        output_str += f" ({'ABCDE'[index]}) {option}\n"
 
-    correct_option = option_letters[options.index(capitals[state])]
+    correct_option = 'ABCDE'[options.index(capitals[state])]
 
     return [output_str, correct_option]
 
@@ -82,3 +77,5 @@ for quizNum in range(35):
         answer_key.write(f"{(str(q_num) + '.').ljust(3, ' ')} {answer} \n")
 
     quiz.write(f"GOODLUCK!!")
+    quiz.close()
+    answer_key.close()
