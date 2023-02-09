@@ -4,21 +4,9 @@
 import random, pprint, os
 from pathlib import Path
 
-capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona': 'Phoenix',
-'Arkansas': 'Little Rock', 'California': 'Sacramento', 'Colorado': 'Denver',
-'Connecticut': 'Hartford', 'Delaware': 'Dover', 'Florida': 'Tallahassee',
-'Georgia': 'Atlanta', 'Hawaii': 'Honolulu', 'Idaho': 'Boise', 'Illinois':
-'Springfield', 'Indiana': 'Indianapolis', 'Iowa': 'Des Moines', 'Kansas':
-'Topeka', 'Kentucky': 'Frankfort', 'Louisiana': 'Baton Rouge', 'Maine':
-'Augusta', 'Maryland': 'Annapolis', 'Massachusetts': 'Boston', 'Michigan':
-'Lansing', 'Minnesota': 'Saint Paul', 'Mississippi': 'Jackson', 'Missouri':
-'Jefferson City', 'Montana': 'Helena', 'Nebraska': 'Lincoln', 'Nevada':
-'Carson City', 'New Hampshire': 'Concord', 'New Jersey': 'Trenton', 'New Mexico': 'Santa Fe', 'New York': 'Albany', 'North Carolina': 'Raleigh',
-'North Dakota': 'Bismarck', 'Ohio': 'Columbus', 'Oklahoma': 'Oklahoma City',
-'Oregon': 'Salem', 'Pennsylvania': 'Harrisburg', 'Rhode Island': 'Providence',
-'South Carolina': 'Columbia', 'South Dakota': 'Pierre', 'Tennessee':
-'Nashville', 'Texas': 'Austin', 'Utah': 'Salt Lake City', 'Vermont':
-'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia', 'West Virginia': 'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
+capitals = {
+    'Abia': 'Umuahia', 'Adamawa': 'Yola', 'Akwa Ibom': 'Uyo', 'Anambra': 'Awka', 'Bauchi': 'Bauchi', 'Bayelsa': 'Yenagoa', 'Benue': 'Makurdi', 'Borno': 'Maiduguri', 'Cross River': 'Calabar', 'Delta': 'Asaba', 'Ebonyi': 'Abakaliki', 'Edo': 'Benin City', 'Ekiti': 'Ado Ekiti', 'Enugu': 'Enugu', 'Gombe': 'Gombe', 'Imo': 'Owerri', 'Jigawa': 'Dutse', 'Kaduna': 'Kaduna', 'Kano': 'Kano', 'Katsina': 'Katsina', 'Kebbi': 'Birnin' 'Kebbi', 'Kogi': 'Lokoja', 'Kwara': 'Ilorin', 'Lagos': 'Ikeja', 'Nasarawa': 'Lafia', 'Niger': 'Minna', 'Ogun': 'Abeokuta', 'Ondo': 'Akure', 'Osun': 'Oshogbo', 'Oyo': 'Ibadan', 'Plateau': 'Jos', 'Rivers': 'Port Harcourt', 'Sokoto': 'Sokoto', 'Taraba': 'Jalingo', 'Yobe': 'Damaturu', 'Zamfara': 'Gusau'
+}
 
 # Creates the quizzes directory
 if not(Path("../quizzes").exists()):
@@ -65,7 +53,7 @@ def make_quiz(num_of_students):
         current_quiz = quizNum + 1
 
     quiz = open(f"../quizzes/quiz{current_quiz}.txt", 'w')
-    answer_key = open(f"../answer_keys/answer_key{quizNum+1}.txt", 'w')
+    answer_key = open(f"../answer_keys/answer_key{current_quiz}.txt", 'w')
 
     # Create header
     quiz.write("Name:\n\nDate:\n\nCourse:\n\n")
@@ -79,9 +67,11 @@ def make_quiz(num_of_students):
 
     # write a question to each question file
     for index in range(len(states)):
-        q_num = index + 1
+        question_num = index + 1
         question, answer = make_question(states[index], 4)
-        quiz.write(f"{q_num}. {question} \n")
-        answer_key.write(f"{(str(q_num) + '.').ljust(3, ' ')} {answer} \n")
+        quiz.write(f"{question_num}. {question} \n")
+        answer_key.write(f"{(str(question_num) + '.').ljust(3, ' ')} {answer} \n")
 
     quiz.write(f"GOODLUCK!!")
+
+make_quiz()
