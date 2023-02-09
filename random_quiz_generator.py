@@ -52,26 +52,26 @@ def make_quiz(num_of_students):
         # Create each quiz and answer key text file 
         current_quiz = quizNum + 1
 
-    quiz = open(f"../quizzes/quiz{current_quiz}.txt", 'w')
-    answer_key = open(f"../answer_keys/answer_key{current_quiz}.txt", 'w')
+        quiz = open(f"../quizzes/quiz{current_quiz}.txt", 'w')
+        answer_key = open(f"../answer_keys/answer_key{current_quiz}.txt", 'w')
 
-    # Create header
-    quiz.write("Name:\n\nDate:\n\nCourse:\n\n")
-    quiz.write(f"State Capitals Quiz (Form {current_quiz})")
-    quiz.write("\n\n")
-    answer_key.write(f"ANSWER KEY\nQUIZ FORM {current_quiz}\n\n")
+        # Create header
+        quiz.write("Name:\n\nDate:\n\nCourse:\n\n")
+        quiz.write(f"State Capitals Quiz (Form {current_quiz})")
+        quiz.write("\n\n")
+        answer_key.write(f"ANSWER KEY\nQUIZ FORM {current_quiz}\n\n")
 
-    # Shuffle the order of the states
-    states = list(capitals.keys())
-    random.shuffle(states)
+        # Shuffle the order of the states
+        states = list(capitals.keys())
+        random.shuffle(states)
 
-    # write a question to each question file
-    for index in range(len(states)):
-        question_num = index + 1
-        question, answer = make_question(states[index], 4)
-        quiz.write(f"{question_num}. {question} \n")
-        answer_key.write(f"{(str(question_num) + '.').ljust(3, ' ')} {answer} \n")
+        # write a question to each question file
+        for index in range(len(states)):
+            question_num = index + 1
+            question, answer = make_question(states[index], 4)
+            quiz.write(f"{question_num}. {question} \n")
+            answer_key.write(f"{(str(question_num) + '.').ljust(3, ' ')} {answer} \n")
 
-    quiz.write(f"GOODLUCK!!")
+        quiz.write(f"GOODLUCK!!")
 
-make_quiz()
+make_quiz(20)
