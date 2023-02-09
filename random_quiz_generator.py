@@ -57,9 +57,12 @@ def make_question(state, options_number):
 
     return [output_str, correct_option]
 
-for quizNum in range(35):  
-    # Create each quiz and answer key text file 
-    current_quiz = quizNum + 1
+
+def make_quiz(num_of_students):
+    """This function makes a specified number of quizzes"""
+    for quizNum in range(num_of_students):  
+        # Create each quiz and answer key text file 
+        current_quiz = quizNum + 1
 
     quiz = open(f"../quizzes/quiz{current_quiz}.txt", 'w')
     answer_key = open(f"../answer_keys/answer_key{quizNum+1}.txt", 'w')
@@ -75,7 +78,7 @@ for quizNum in range(35):
     random.shuffle(states)
 
     # write a question to each question file
-    for index in range(len(capitals)):
+    for index in range(len(states)):
         q_num = index + 1
         question, answer = make_question(states[index], 4)
         quiz.write(f"{q_num}. {question} \n")
